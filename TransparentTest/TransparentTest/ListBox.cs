@@ -51,7 +51,13 @@ namespace TransparentTest
                 }
 
                 int h = (int)font.MeasureString(items[start+i]).Y;
-                batch.DrawString(font, items[start+i], new Vector2(0, 20 + i * h), Color.Black);
+                Color chat = Color.Black;
+                if ((start + i) == selected)
+                {
+                    chat = Color.Red;
+                }
+
+                batch.DrawString(font, items[start + i], new Vector2(0, 20 + i * h), chat);
             }
             batch.End();
         }
@@ -70,20 +76,29 @@ namespace TransparentTest
 
             if (newState.IsKeyDown(Keys.Down) && (now - LastKeyAccept).Milliseconds > 50)
             {
-                if (start + elems < items.Count)
+                if (selected < items.Count - 1)
                 {
-                    start++;
+                    selected++;
                 }
                 LastKeyAccept = now;
             }
 
             if (newState.IsKeyDown(Keys.Up) && (now - LastKeyAccept).Milliseconds > 50)
             {
-                if (start > 0)
+                if (selected > 0)
                 {
-                    start--;
+                    selected--;
                 }
                 LastKeyAccept = now;
+            }
+
+            if (selected >= start + elems)
+            {
+                start++;
+            }
+            else if (selected < start)
+            {
+                start--;
             }
 
 
