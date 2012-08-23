@@ -71,13 +71,17 @@ namespace TransparentTest
             tex3.SetData(data3);
 
             font = Content.Load<SpriteFont>("Fonts/Default");
+
+            guiManager.AddFont("default", font);
             //vWindow = new VictoryWindow(new Vector2(430, 10), "Victory!", font, guiManager);
-            box = new ListBox(400, 300, font, guiManager);
-            vWindow = new VictoryWindow(new Vector2(430, 10), "Victory!", font, guiManager);
+            //box = new ListBox(400, 300, font, guiManager);
+            //vWindow = new VictoryWindow(new Vector2(430, 10), "Victory!", font, guiManager);
             for (int i = 0; i < 100; i++)
             {
-                box.AddItem(i.ToString());
+                //box.AddItem(i.ToString());
             }
+
+            var field = new TextField(new Vector2(100, 400), new Vector2(400, 40), guiManager);
         }
 
         /// <summary>
@@ -115,10 +119,10 @@ namespace TransparentTest
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
+            /*spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
             spriteBatch.Draw(tex2, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, new Vector2(800, 600), SpriteEffects.None, 1f);
             spriteBatch.Draw(tex3, new Vector2(0, 0), null, Color.White, 0f, Vector2.Zero, new Vector2(400, 400), SpriteEffects.None, 1f);
-            spriteBatch.End();
+            spriteBatch.End();*/
 
             guiManager.Draw(spriteBatch);
 

@@ -12,11 +12,17 @@ namespace TransparentTest
     {
         private GraphicsDevice graphics;
         private List<IGUI> elements;
-
+        private Dictionary<string, SpriteFont> fonts; 
         public GUIManager(GraphicsDevice graphics)
         {
             this.graphics = graphics;
             elements = new List<IGUI>();
+            fonts = new Dictionary<string, SpriteFont>();
+        }
+
+        public SpriteFont GetFont(String s)
+        {
+            return fonts[s];
         }
 
         public void AddGui(IGUI gui)
@@ -76,6 +82,11 @@ namespace TransparentTest
             elements[selected].HandleInput(time);
 
             oldState = newState;
+        }
+
+        public void AddFont(string n, SpriteFont font)
+        {
+            fonts[n] = font;
         }
     }
 }
