@@ -14,19 +14,18 @@ namespace TransparentTest
         int start;
         int max;
         List<String> items;
-        int width, height;
         SpriteFont font;
         IGUIManager guiManager;
+        Vector2 fontSize;
 
         public ListBox(int width, int height, SpriteFont font, IGUIManager manager) : base(new Vector2(0,0), new Vector2(width, height), 0, manager)
         {
-            this.width = width;
-            this.height = height;
+            size = new Vector2(width, height);
             items = new List<String>();
             this.font = font;
-            Vector2 size = font.MeasureString("test");
+            fontSize = font.MeasureString("test");
 
-            max = (int)((height - 40) / size.Y);
+            max = (int)((height - 40) / fontSize.Y);
 
             guiManager = manager;
             guiManager.AddGui(this);
@@ -72,43 +71,74 @@ namespace TransparentTest
             DateTime now = DateTime.Now;
             newState = Keyboard.GetState();
             //do stuff*********************************
-            int elems = Math.Min(max, (items.Count - start));
 
             if (newState.IsKeyDown(Keys.Down) && (now - LastKeyAccept).Milliseconds > 50)
             {
-                if (selected < items.Count - 1)
-                {
-                    selected++;
-                }
+                MoveDown();
                 LastKeyAccept = now;
             }
 
             if (newState.IsKeyDown(Keys.Up) && (now - LastKeyAccept).Milliseconds > 50)
             {
-                if (selected > 0)
-                {
-                    selected--;
-                }
+                MoveUp();
                 LastKeyAccept = now;
             }
-
-            if (selected >= start + elems)
-            {
-                start++;
-            }
-            else if (selected < start)
-            {
-                start--;
-            }
-
 
             //*****************************************
             oldState = newState;
         }
 
-        public override bool Intersects(Point p)
+        public override bool Intersects(Vector2 p)
         {
-            return ((p.X >= 0 && p.X <= width) && (p.Y >= 0 && p.Y <= height));
+            return ((p.X >= 0 && p.X <= size.X) && (p.Y >= 0 && p.Y <= size.Y));
+        }
+
+        public override void Clicked(Vector2 p) 
+        {
+            Vector2 local = p - position;
+            if ((int)local.Y < 20)
+            {
+                MoveUp();
+            }
+            else if ((int)local.Y > (position.Y + size.Y - 20))
+            {
+                MoveDown();
+            }
+            else
+            {
+                int index = (int)((local.Y - 20) / fontSize.Y);
+                if (start + index < items.Count && index < max)
+                {
+                    selected = start + index;
+                }
+                
+            }
+        }
+
+        private void MoveUp() 
+        {
+            if (selected > 0)
+            {
+                selected--;
+            }
+
+            if (selected < start)
+            {
+                start--;
+            }
+        }
+
+        private void MoveDown()
+        {
+            int elems = Math.Min(max, (items.Count - start));
+            if (selected < items.Count - 1)
+            {
+                selected++;
+                if (selected >= start + elems)
+                {
+                    start++;
+                }
+            }
         }
     }
 }

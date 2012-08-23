@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI.cs" />
     <Compile Include="GUIManager.cs" />
     <Compile Include="IGraphicsProvider.cs" />
     <Compile Include="IGUI.cs" />

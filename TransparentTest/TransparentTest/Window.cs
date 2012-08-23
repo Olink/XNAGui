@@ -7,11 +7,10 @@ using Microsoft.Xna.Framework;
 
 namespace TransparentTest
 {
-    class Window : IGUI
+    class Window : GUI
     {
         static Texture2D tex1;
         static Texture2D tex4;
-        protected Vector2 position, size;
         int border;
         Line[] lines;
         IGUIManager guiManager;
@@ -42,7 +41,7 @@ namespace TransparentTest
             manager.AddGui(this);
         }
 
-        public virtual void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch batch)
         {
             foreach (Line l in lines)
             {
@@ -54,12 +53,14 @@ namespace TransparentTest
             batch.End();
         }
 
-        public virtual void Update(GameTime time) { }
-        public virtual void HandleInput(GameTime time) { }
+        public override void Update(GameTime time) { }
+        public override void HandleInput(GameTime time) { }
 
-        public virtual bool Intersects(Point p)
+        public override bool Intersects(Vector2 p)
         {
             return ((p.X >= position.X && p.X <= (position + size).X) && (p.Y >= position.Y && p.Y <= (position + size).Y));
         }
+
+        public override void Clicked(Vector2 p) { }
     }
 }

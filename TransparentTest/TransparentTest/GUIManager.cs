@@ -52,12 +52,14 @@ namespace TransparentTest
         {
             int temp = -1;
             newState = Mouse.GetState();
+            Vector2 p = Vector2.Zero;
             if (newState.LeftButton == ButtonState.Released && oldState.LeftButton == ButtonState.Pressed)
             {
+                p = new Vector2(oldState.X, oldState.Y);
                 for(int i = 0; i < elements.Count; i++)
                 {
                     IGUI gui = elements[i];
-                    if (gui.Intersects(new Point(oldState.X, oldState.Y)))
+                    if (gui.Intersects(p))
                     {
                         temp = i;
                         break;
@@ -68,6 +70,7 @@ namespace TransparentTest
             if (temp != -1)
             {
                 selected = temp;
+                elements[temp].Clicked(p);
             }
 
             elements[selected].HandleInput(time);

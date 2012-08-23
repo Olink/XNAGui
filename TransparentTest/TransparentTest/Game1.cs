@@ -19,7 +19,6 @@ namespace TransparentTest
         GUIManager guiManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        TransparentTest.Window window;
         VictoryWindow vWindow;
 
         Texture2D tex2, tex3;
