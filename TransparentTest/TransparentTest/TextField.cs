@@ -51,8 +51,7 @@ namespace TransparentTest
 
         public override bool Intersects(Vector2 p)
         {
-            //throw new NotImplementedException();
-            return false;
+            return base.Intersects(p);
         }
 
         private KeyboardState oldState = Keyboard.GetState();

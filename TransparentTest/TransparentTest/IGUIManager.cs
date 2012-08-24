@@ -10,6 +10,6 @@ namespace TransparentTest
     {
         GraphicsDevice GetGraphics();
         void AddGui(IGUI g);
-        SpriteFont GetFont(string p);
+        SpriteFont GetFont(String s);
     }
 }

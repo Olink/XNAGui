@@ -13,7 +13,7 @@ namespace TransparentTest
         static Texture2D tex4;
         int border;
         Line[] lines;
-        IGUIManager guiManager;
+        protected IGUIManager guiManager;
 
         public Window(Vector2 pos, Vector2 size, int bor, IGUIManager manager)
         {

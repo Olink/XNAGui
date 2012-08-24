@@ -81,6 +81,10 @@ namespace TransparentTest
                 //box.AddItem(i.ToString());
             }
 
+            var label = new Label(new Vector2(300, 200), new Vector2(300,30), "This is a label. what happens when the text is", Justification.CENTER, guiManager);
+            var label2 = new Label(new Vector2(300, 300), new Vector2(300, 30), "This is a label. what happens when the text is too wide.", Justification.LEFT, guiManager);
+            var label3 = new Label(new Vector2(300, 400), new Vector2(300, 30), "This is a label. what happens when the text is too wide.", Justification.RIGHT, guiManager);
+
             var field = new TextField(new Vector2(100, 400), new Vector2(400, 40), guiManager);
         }
 

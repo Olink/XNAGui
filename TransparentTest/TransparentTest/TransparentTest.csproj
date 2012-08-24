@@ -112,6 +112,7 @@
     <Compile Include="IGraphicsProvider.cs" />
     <Compile Include="IGUI.cs" />
     <Compile Include="IGUIManager.cs" />
+    <Compile Include="Label.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="ListBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
